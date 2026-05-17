@@ -46,7 +46,7 @@ def save(df: pd.DataFrame, name: str):
         existing = pd.read_csv(path)
         df = pd.concat([existing, df]).drop_duplicates(subset=["day"]).sort_values("day")
     df.to_csv(path, index=False)
-    print(f"  Saved {len(df)} rows → {path}")
+    print(f"  Saved {len(df)} rows -> {path}")
 
 def main():
     token = get_valid_token()
