@@ -15,11 +15,22 @@ def get_start_date(name: str) -> str:
     if os.path.exists(path):
         existing = pd.read_csv(path)
         if "day" in existing.columns and not existing.empty:
-            return (date.fromisoformat(existing["day"].max()) + timedelta(days=1)).isoformat()
+            existing_days = set(existing["day"])
+            start = date.fromisoformat(existing["day"].min())
+            today = date.today()
+            current = start
+            while current <= today:
+                if current.isoformat() not in existing_days:
+                    return current.isoformat()
+                current += timedelta(days=1)
+            return (today + timedelta(days=1)).isoformat()  # fully up to date
     return (date.today() - timedelta(days=30)).isoformat()
 
 def fetch(endpoint: str, token: str, start_date: str) -> list:
     end_date = date.today().isoformat()
+    if start_date > end_date:
+        print(f"  {endpoint} already up to date.")
+        return []
     resp = requests.get(
         f"{BASE_URL}/{endpoint}",
         headers={"Authorization": f"Bearer {token}"},
