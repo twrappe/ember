@@ -16,7 +16,7 @@ By using EMBER, you agree to these Terms of Service. If you do not agree, do not
 
 ## Description of Service
 
-EMBER passively monitors biometric data from Oura Ring to support early detection of manic episodes in individuals with Bipolar I disorder. It is provided for personal and research purposes only.
+EMBER passively monitors biometric data from Oura Ring — including HRV, sleep, resting heart rate, and temperature trends — to help individuals track physiological patterns over time. It is designed for personal health awareness, chronic condition self-monitoring, and research purposes, and is provided solely for those uses.
 
 ## Not Medical Advice
 

@@ -1,19 +1,38 @@
-# React + TypeScript + Vite
+# EMBER — Dashboard Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite dashboard for the EMBER health monitoring platform. Displays biometric deviation scores, episode risk, and AI-generated summaries sourced from the EMBER REST API.
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Node.js 18+
+- EMBER API server running on `http://localhost:8000` (see root README)
 
-## React Compiler
+## Development
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Opens at `http://localhost:5173`.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## E2E tests
+
+```bash
+npm run test:e2e        # headless
+npm run test:e2e:ui     # interactive Playwright UI
+npm run test:e2e:report # open last HTML report
+```
+
+Requires both the API server and the Vite dev server to be running.
+
+## Build
+
+```bash
+npm run build
+```
+
+Output is written to `dist/`.
 
 ```js
 export default defineConfig([

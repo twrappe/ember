@@ -64,7 +64,7 @@ def get_tokens():
     webbrowser.open(auth_url)
 
     # Listen for callback
-    server = HTTPServer(("localhost", 8000), CallbackHandler)
+    server = HTTPServer(("localhost", 8080), CallbackHandler)
     server.handle_request()
 
     if not auth_code:

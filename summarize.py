@@ -72,29 +72,29 @@ def build_context(scores_df: pd.DataFrame, mood_df: pd.DataFrame, today: date) -
     return "\n".join(lines)
 
 def build_prompt(context: str, today: date) -> str:
-    return f"""You are a clinical data analyst reviewing physiological and self-reported mood data for a single subject (adult male) who is monitoring for early mood episode signals consistent with Bipolar I disorder.
+    return f"""You are a clinical data analyst reviewing physiological and self-reported data for a single subject (adult) engaged in continuous personal health monitoring.
 
 Today's date: {today}
-Baseline: 30-day rolling window. Z-scores represent deviation from personal mean.
+Baseline: 30-day rolling window. Z-scores represent deviation from the subject's personal mean.
 Flag thresholds: NORMAL < 1.0, MODERATE 1.0-2.0, HIGH >= 2.0
 
 Scoring metrics:
-- temperature_deviation: basal body temperature deviation (°C). Elevation can precede manic episodes.
-- hrv_balance: heart rate variability balance score. Low values indicate poor recovery.
-- resting_heart_rate: RHR contributor score. Low score = elevated RHR (stress signal).
-- recovery_index: overnight recovery quality.
+- temperature_deviation: basal body temperature deviation (°C). Sustained elevation or depression may signal immune activation, hormonal shifts, or autonomic changes.
+- hrv_balance: heart rate variability balance score. Low values indicate poor recovery, high allostatic load, or autonomic dysregulation.
+- resting_heart_rate: RHR contributor score. Low score = elevated RHR, which may reflect stress, inflammation, poor sleep, or early illness.
+- recovery_index: overnight recovery quality. Reflects cardiovascular and autonomic readiness.
 - previous_night: prior night sleep quality score.
-- sleep_balance: cumulative sleep balance over time.
+- sleep_balance: cumulative sleep balance over time. Persistent deficits are a common precursor to mood, cognitive, and immune disruption.
 
 {context}
 
-Write a concise clinical summary (3-5 sentences) for a psychiatrist reviewing this data. Cover:
-1. Overall physiological status vs baseline
+Write a concise summary (3-5 sentences) for a clinician or the subject reviewing this data. Cover:
+1. Overall physiological status relative to personal baseline
 2. Any metrics showing sustained or multi-day deviation
 3. Cross-reference with mood journal if available
 4. Overall signal: NORMAL / WATCH / ALERT and brief rationale
 
-Be specific and data-driven. Do not speculate beyond what the data shows. Flag confounders (alcohol, illness, travel, stress) where relevant."""
+Be specific and data-driven. Do not speculate beyond what the data shows. Flag known confounders (alcohol, illness, travel, life stress) where relevant. Frame observations in terms of general health and recovery rather than assuming any specific diagnosis."""
 
 def call_claude(prompt: str) -> str:
     response = requests.post(
