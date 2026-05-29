@@ -18,7 +18,7 @@ const metricConfig = {
   hrv: { label: 'HRV', unit: 'ms', color: '#818cf8', domain: [0, 80] },
   sleep: { label: 'Sleep', unit: 'h', color: '#34d399', domain: [0, 10] },
   readiness: { label: 'Readiness', unit: '', color: '#60a5fa', domain: [0, 100] },
-  riskScore: { label: 'Risk Score', unit: '', color: '#f87171', domain: [0, 100] },
+  riskScore: { label: 'Pattern', unit: '', color: '#f87171', domain: [0, 100] },
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

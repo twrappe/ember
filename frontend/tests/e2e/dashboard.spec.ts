@@ -41,8 +41,42 @@ test.describe('EMBER Dashboard', () => {
 
   // ──────────────────────────────────────────────
   // Alert Panel
+  // Uses mocked API response so tests are independent of live data state
   // ──────────────────────────────────────────────
   test.describe('Alert Panel', () => {
+    const mockDashboard = {
+      metrics: [
+        { date: '05-27', hrv: 45, sleep: 78, readiness: 82, riskScore: 25 },
+        { date: '05-28', hrv: 38, sleep: 65, readiness: 71, riskScore: 62 },
+      ],
+      alerts: [
+        {
+          id: '2026-05-28',
+          date: '2026-05-28',
+          severity: 'high',
+          message: 'Composite deviation 2.50 on 2026-05-28',
+          flag: 'HIGH',
+        },
+        {
+          id: '2026-05-27',
+          date: '2026-05-27',
+          severity: 'medium',
+          message: 'Composite deviation 1.20 on 2026-05-27',
+          flag: 'MODERATE',
+        },
+      ],
+      currentRisk: 62,
+      lastSync: '2026-05-28',
+      summary: { date: '2026-05-28', summary: 'Test summary.' },
+    };
+
+    test.beforeEach(async ({ page }) => {
+      await page.route('**/api/dashboard', route =>
+        route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify(mockDashboard) })
+      );
+      await page.goto('/');
+    });
+
     test('renders alert panel', async ({ page }) => {
       await expect(page.getByTestId('alert-panel')).toBeVisible();
     });
@@ -60,20 +94,15 @@ test.describe('EMBER Dashboard', () => {
     });
 
     test('dismissing an alert removes it from the panel', async ({ page }) => {
-      // Count initial alerts
       const initialAlerts = await page.locator('.alert-item').count();
       expect(initialAlerts).toBeGreaterThan(0);
 
-      // Dismiss first alert
-      const firstDismiss = page.locator('.dismiss-btn').first();
-      await firstDismiss.click();
+      await page.locator('.dismiss-btn').first().click();
 
-      // Count should decrease
       await expect(page.locator('.alert-item')).toHaveCount(initialAlerts - 1);
     });
 
     test('shows no-alerts state after dismissing all', async ({ page }) => {
-      // Dismiss all alerts
       while (await page.locator('.dismiss-btn').count() > 0) {
         await page.locator('.dismiss-btn').first().click();
       }

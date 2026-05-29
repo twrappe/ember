@@ -27,10 +27,10 @@ export function RiskGauge({ score }: RiskGaugeProps) {
   };
 
   const getLabel = (s: number) => {
-    if (s < 30) return 'LOW RISK';
-    if (s < 60) return 'ELEVATED';
-    if (s < 80) return 'HIGH RISK';
-    return 'CRITICAL';
+    if (s < 30) return 'ON TRACK';
+    if (s < 60) return 'HEADS UP';
+    if (s < 80) return 'CHECK IN';
+    return 'TAKE ACTION';
   };
 
   const color = getColor(score);

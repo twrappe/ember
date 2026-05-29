@@ -3,7 +3,7 @@ export interface DailyMetric {
   hrv: number;
   sleep: number;       // hours
   readiness: number;   // 0-100
-  riskScore: number;   // 0-100, mania onset risk
+  riskScore: number;   // 0-100, composite deviation score
 }
 
 export interface Alert {

@@ -7,9 +7,9 @@ interface AlertPanelProps {
 }
 
 const severityConfig = {
-  high: { icon: AlertCircle, color: '#f87171', bg: 'rgba(248,113,113,0.08)', border: 'rgba(248,113,113,0.25)', label: 'CRITICAL' },
-  medium: { icon: AlertTriangle, color: '#fb923c', bg: 'rgba(251,146,60,0.08)', border: 'rgba(251,146,60,0.25)', label: 'WARNING' },
-  low: { icon: Info, color: '#60a5fa', bg: 'rgba(96,165,250,0.08)', border: 'rgba(96,165,250,0.25)', label: 'NOTICE' },
+  high: { icon: AlertCircle, color: '#f87171', bg: 'rgba(248,113,113,0.08)', border: 'rgba(248,113,113,0.25)', label: 'TAKE ACTION' },
+  medium: { icon: AlertTriangle, color: '#fb923c', bg: 'rgba(251,146,60,0.08)', border: 'rgba(251,146,60,0.25)', label: 'HEADS UP' },
+  low: { icon: Info, color: '#60a5fa', bg: 'rgba(96,165,250,0.08)', border: 'rgba(96,165,250,0.25)', label: 'FYI' },
 };
 
 export function AlertPanel({ alerts }: AlertPanelProps) {
@@ -24,7 +24,7 @@ export function AlertPanel({ alerts }: AlertPanelProps) {
   return (
     <div className="alert-panel" data-testid="alert-panel">
       <div className="panel-header">
-        <span className="panel-label">ALERTS</span>
+        <span className="panel-label">NOTICES</span>
         {visible.length > 0 && (
           <span className="alert-badge" data-testid="alert-count">{visible.length}</span>
         )}
@@ -32,7 +32,7 @@ export function AlertPanel({ alerts }: AlertPanelProps) {
 
       {visible.length === 0 ? (
         <div className="no-alerts" data-testid="no-alerts">
-          <span>No active alerts</span>
+          <span>Nothing to flag</span>
         </div>
       ) : (
         <div className="alert-list">

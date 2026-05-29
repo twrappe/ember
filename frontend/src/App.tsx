@@ -45,7 +45,7 @@ function App() {
         timestamp: String(a.date),
         severity: (a.severity as 'low' | 'medium' | 'high') ?? 'low',
         message: String(a.message),
-        metric: 'Composite Deviation',
+        metric: 'Daily Pattern',
         value: 0,
         threshold: 0,
         dismissed: false,
@@ -75,7 +75,7 @@ function App() {
     { key: 'hrv' as ActiveMetric, label: 'HRV', value: `${latest.hrv}`, icon: Activity, color: '#818cf8' },
     { key: 'sleep' as ActiveMetric, label: 'Sleep', value: `${latest.sleep}`, icon: Moon, color: '#34d399' },
     { key: 'readiness' as ActiveMetric, label: 'Readiness', value: `${latest.readiness}`, icon: Zap, color: '#60a5fa' },
-    { key: 'riskScore' as ActiveMetric, label: 'Risk Trend', value: `${latest.riskScore}`, icon: TrendingUp, color: '#f87171' },
+    { key: 'riskScore' as ActiveMetric, label: 'Pattern', value: `${latest.riskScore}`, icon: TrendingUp, color: '#f87171' },
   ] : [];
 
   return (
@@ -117,7 +117,7 @@ function App() {
           <>
             <div className="top-row">
               <div className="risk-card" data-testid="risk-card">
-                <div className="card-label">EPISODE RISK</div>
+                <div className="card-label">DAILY SIGNAL</div>
                 <RiskGauge score={data.currentRisk} />
                 {data.summary && (
                   <p className="risk-caption">
@@ -154,7 +154,7 @@ function App() {
 
             {data.summary && (
               <div className="summary-card" data-testid="summary-card">
-                <div className="card-label">CLINICAL SUMMARY — {data.summary.date}</div>
+                <div className="card-label">YOUR SUMMARY — {data.summary.date}</div>
                 <p className="summary-text">{data.summary.summary.replace(/\*\*/g, '')}</p>
               </div>
             )}
